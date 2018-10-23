@@ -3,16 +3,21 @@ import pickle
 import sys
 import threading
 
+os.environ["DISCORD_BOT_TOKEN"]  = "NTA0MzgzNDQzODk1OTc1OTM2.DrEPcQ.eRXl88bM76_Tl9bLUFTbZIihx8s"
+
 from PyQt5.QtWidgets import QApplication
 
 from gamelogic import events, gamespace
 from gui import ui
 from gui.dialogs import AddWorldDialog
 
+
 world: gamespace.World = None
 app = None
 
 game_channel = None  # The public text channel where public events take place
+
+
 
 
 # my test routine to initialize the world. Should be replaced with ui stuff eventually
