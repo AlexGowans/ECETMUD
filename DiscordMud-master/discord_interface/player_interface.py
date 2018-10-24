@@ -11,7 +11,7 @@ from discord.ext import commands
 from gamelogic import actors, weapons, gamespace
 
 MOVEMENT_WAIT_TIME = .01  # seconds
-TIMEOUT = 10.0
+TIMEOUT = 20.0
 
 
 class PlayerInterface(QObject):

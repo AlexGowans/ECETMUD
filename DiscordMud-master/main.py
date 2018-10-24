@@ -3,7 +3,9 @@ import pickle
 import sys
 import threading
 
-os.environ["DISCORD_BOT_TOKEN"]  = "NTA0MzgzNDQzODk1OTc1OTM2.DrEPcQ.eRXl88bM76_Tl9bLUFTbZIihx8s"
+from TOKEN import *
+
+os.environ["DISCORD_BOT_TOKEN"]  = myToken
 
 from PyQt5.QtWidgets import QApplication
 
