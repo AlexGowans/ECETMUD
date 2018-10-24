@@ -21,7 +21,7 @@ game_channel = None  # The public text channel where public events take place
 
 
 
-
+#NOT SURE IF THIS IS ACTUALLY USED ANYMORE, IT CAME WITH A UI
 # my test routine to initialize the world. Should be replaced with ui stuff eventually
 def default_init(xWidth, yHeight):
     world = gamespace.World("Testworld", xWidth, yHeight)
@@ -39,8 +39,8 @@ def default_init(xWidth, yHeight):
 
 
 if __name__ == "__main__":
-    import discord_interface.player_interface as player_interface
-    import discord_interface.basic_bot as gBot
+    import discord_interface.player_interface as player_interface   #THIS IS OUR BOT COMMANDS/RESPONSES
+    import discord_interface.basic_bot as gBot                      #THIS IS OUR BOT
 
     sys._excepthook = sys.excepthook
 
@@ -59,23 +59,23 @@ if __name__ == "__main__":
 
     # Have world be built by user.
     if os.path.isfile(r'./world.p'):
-        world = pickle.load(open(r"./world.p", "rb"))
+        world = pickle.load(open(r"./world.p", "rb")) #LOAD EXISTING WORLD
     else:
-        dialog = AddWorldDialog()
+        dialog = AddWorldDialog()   #CALL WORLD BUILDING UI
         if dialog.exec_():
             world = dialog.returnData
         else:
             sys.exit(-1)
 
     # Start player interface bot in separate thread
-    pi = player_interface.setup(gBot.bot, world)
+    pi = player_interface.setup(gBot.bot, world) #these 2 files are in the discord interface folder
     pi.registered.connect(world.addActor)
-    tBot = threading.Thread(target=gBot.bot.run, args=(gBot.TOKEN,), daemon=True)
+    tBot = threading.Thread(target=gBot.bot.run, args=(gBot.TOKEN,), daemon=True) #TOKEN is not the .py file, it is a variable in the bot
     threads['bot'] = tBot
-    tBot.start()
+    tBot.start() #start the bot itself
 
     # Start main Qt window
-    main_window = ui.MainWindow(app, world)
+    main_window = ui.MainWindow(app, world)     #show game map for host
 
     # Register signal-slots
     pi.registered.connect(main_window.update)
