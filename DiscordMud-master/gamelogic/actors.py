@@ -82,22 +82,50 @@ class Enemy(NPC):
 
 
 class PlayerClass:
-    def __init__(self, name=None, hitpoints_max_base=1,magicpoints_max_base=1,**kwargs):
+    def __init__(self, name=None, hitpoints_max_base=1,magicpoints_max_base=1,strpoints_base=1,dexpoints_base=1,intpoints_base=1,lckpoints_base=1,**kwargs):
         self.Name: str = name
         self.HitPointsMaxBase = hitpoints_max_base
         self.MagicPointsMaxBase = magicpoints_max_base
+        self.StrPointsBase = strpoints_base
+        self.DexPointsBase = dexpoints_base
+        self.IntPointsBase = intpoints_base
+        self.LckPointsBase = lckpoints_base
 
 
     def __str__(self):
         return self.Name
 
+#PLAYER CLASSES
 
 class WandererClass(PlayerClass):
     """ Default player class with nothing special. """
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, hitpoints_max_base=50,magicpoints_max_base=5, **kwargs)
         self.Name = "Wanderer"
+
+class WarriorClass(PlayerClass):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, hitpoints_max_base=70,magicpoints_max_base=5,strpoints_base = 5,dexpoints_base = 3 **kwargs)
+        self.Name = "Warrior"
+
+class MagicianClass(PlayerClass):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, hitpoints_max_base=30,magicpoints_max_base=10,intpoints_base = 5,lckpoints_base = 2 **kwargs)
+        self.Name = "Magician"
+
+
+######################################################
+
+
+
+
+
+
+
+
+
+
+
 
 
 class PlayerCharacter(Actor):
