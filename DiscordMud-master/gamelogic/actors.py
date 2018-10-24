@@ -68,9 +68,10 @@ class Enemy(NPC):
 
 
 class PlayerClass:
-    def __init__(self, name=None, hitpoints_max=1):
+    def __init__(self, name=None, hitpoints_max_base=1,**kwargs):
         self.Name: str = name
-        self.HitPointsMaxBase = hitpoints_max
+        self.HitPointsMaxBase = hitpoints_max_base
+
 
     def __str__(self):
         return self.Name
@@ -80,7 +81,7 @@ class WandererClass(PlayerClass):
     """ Default player class with nothing special. """
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, hitpoints_max=50, **kwargs)
+        super().__init__(*args, hitpoints_max_base=50, **kwargs)
         self.Name = "Wanderer"
 
 

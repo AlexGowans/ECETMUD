@@ -9,7 +9,6 @@ class Helmet(HeadArmor):
 
     @property
     def ArmorCount(self):
-        # Determine if the bullet hits or misses
         return self._ArmorCount
 
     @ArmorCount.setter
