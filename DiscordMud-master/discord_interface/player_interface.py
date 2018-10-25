@@ -75,11 +75,21 @@ class PlayerInterface(QObject):
               "Player Name: {}\n" \
               "Class: {}\n" \
               "Health: {}\n" \
+              "Mana: {}\n" \
+              "Strength: {}\n" \
+              "Dexterity: {}\n" \
+              "Intelligence: {}\n" \
+              "Luck: {}\n" \
               "Currency: {}\n" \
               "Equipment: \n{}".format(member.name,
                                        pc.Name,
                                        pc.Class.Name,
                                        pc.HitPoints,
+                                       pc.MagicPoints,
+                                       pc.StrPoints,
+                                       pc.DexPoints,
+                                       pc.IntPoints,
+                                       pc.LckPoints,
                                        pc.Currency,
                                        str(pc.EquipmentSet))
         await self.bot.say(msg)
