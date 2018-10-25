@@ -121,22 +121,23 @@ class PlayerInterface(QObject):
               "Class Skills: \n" .format(pc.Name,
                                          pc.Class.Name)
         await self.bot.say(msg)
-    #@Class.command(pass_context=True)
-    #async def changeclass(slef, ctx: discord.ext.commands.context.context, index):
-     #   member = ctx.message.author
-     #   if not self.check_member(member):
-      #      await self.bot.say("you're not registered yet!")
-       #     return
-        #pc = self.players[member.id]
-        #await self.bot.say("change class\n1/ warrior\n2/ magician\n 0/no class")
-        #response = await self.bot.wait_for_message(timeout=timeout, author=member,
-        #                                           check=lambda msg: msg.content.lower() == '1' or '2' or '0')
-        #if response is none:
-         #   await self.bot.say('nevermind...')
-         #   return
-       # if response is '1':
-        #    pc.class: playerclass = warriorclass()
-         #   return
+    @Class.command(pass_context=True)
+    async def changeclass(slef, ctx: discord.ext.commands.Context, index):
+        member = ctx.message.author
+        if not self.check_member(member):
+            await self.bot.say("you're not registered yet!")
+            return
+        pc = self.players[member.id]
+        await self.bot.say("change class\n1/ warrior\n2/ magician\n 0/no class")
+        response = await self.bot.wait_for_message(timeout=timeout, author=member,
+                                                   check=lambda msg: msg.content.lower() == '1' or '2' or '0')
+        if response is none:
+            await self.bot.say('nevermind...')
+            return
+        if response is '1':
+            #trying to set class, may need a setter in the actors.py?
+            #pc.Class = WarriorClass()
+            return
 
 
 
