@@ -74,26 +74,72 @@ class PlayerInterface(QObject):
         msg = "User: {}\n" \
               "Player Name: {}\n" \
               "Class: {}\n" \
-              "Health: {}\n" \
-              "Mana: {}\n" \
-              "Strength: {}\n" \
-              "Dexterity: {}\n" \
-              "Intelligence: {}\n" \
-              "Luck: {}\n" \
               "Currency: {}\n" \
               "Equipment: \n{}".format(member.name,
                                        pc.Name,
                                        pc.Class.Name,
-                                       pc.HitPoints,
-                                       pc.MagicPoints,
-                                       pc.StrPoints,
-                                       pc.DexPoints,
-                                       pc.IntPoints,
-                                       pc.LckPoints,
                                        pc.Currency,
                                        str(pc.EquipmentSet))
         await self.bot.say(msg)
 
+    @commands.command(pass_context=True)
+    async def howami(self, ctx: discord.ext.commands.context.Context):
+        member = ctx.message.author
+        if not self.check_member(member):
+            await self.bot.say("You're not registered yet!")
+            return
+        pc = self.players[member.id]
+        msg = "Player Name: {}\n" \
+              "Health: {}/{}\n" \
+              "Mana: {}/{}\n" \
+              "Strength:     {} // {} x {} \n" \
+              "Dexterity:    {} // {} x {} \n" \
+              "Intelligence: {} // {} x {} \n" \
+              "Luck:         {} // {} x {} \n".format(pc.Name,
+                                       pc.HitPoints,pc.HitPointsMax,
+                                       pc.MagicPoints,pc.MagicPointsMax,
+                                       pc.Strength,pc.StrPoints,pc.Class.StrPointsMulti,
+                                       pc.Dexterity,pc.DexPoints,pc.Class.DexPointsMulti,
+                                       pc.Intelligence,pc.IntPoints,pc.Class.IntPointsMulti,
+                                       pc.Luck,pc.LckPoints,pc.Class.LckPointsMulti)
+        await self.bot.say(msg)
+
+
+#############################
+#Trying to create a group of commands
+#############################
+    @commands.group("Class", pass_context=True, invoke_without_command=True)
+    async def Class(self, ctx: discord.ext.commands.Context):
+        member = ctx.message.author
+        if not self.check_member(member):
+            await self.bot.say("You're not registered yet!")
+            return
+        pc = self.players[member.id]
+        msg = "Player Name: {}\n" \
+              "Class: {}\n" \
+              "Info:  \n" \
+              "Class Skills: \n" .format(pc.Name,
+                                         pc.Class.Name)
+    #@Class.command(pass_context=True)
+    #async def changeclass(slef, ctx: discord.ext.commands.context.context, index):
+     #   member = ctx.message.author
+     #   if not self.check_member(member):
+      #      await self.bot.say("you're not registered yet!")
+       #     return
+        #pc = self.players[member.id]
+        #await self.bot.say("change class\n1/ warrior\n2/ magician\n 0/no class")
+        #response = await self.bot.wait_for_message(timeout=timeout, author=member,
+        #                                           check=lambda msg: msg.content.lower() == '1' or '2' or '0')
+        #if response is none:
+         #   await self.bot.say('nevermind...')
+         #   return
+       # if response is '1':
+        #    pc.class: playerclass = warriorclass()
+         #   return
+
+
+
+    #where am I, the group of inventory commands then the go command
     @commands.command(pass_context=True)
     async def whereami(self, ctx: discord.ext.commands.context.Context):
         member = ctx.message.author
