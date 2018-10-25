@@ -106,7 +106,7 @@ class PlayerInterface(QObject):
 
 
 #############################
-#Trying to create a group of commands
+#Class commands
 #############################
     @commands.group("Class", pass_context=True, invoke_without_command=True)
     async def Class(self, ctx: discord.ext.commands.Context):
@@ -122,7 +122,7 @@ class PlayerInterface(QObject):
                                          pc.Class.Name)
         await self.bot.say(msg)
     @Class.command(pass_context=True)
-    async def changeclass(slef, ctx: discord.ext.commands.Context, index):
+    async def change(self, ctx: discord.ext.commands.Context, index):
         member = ctx.message.author
         if not self.check_member(member):
             await self.bot.say("you're not registered yet!")
@@ -130,14 +130,14 @@ class PlayerInterface(QObject):
         pc = self.players[member.id]
         await self.bot.say("change class\n1/ warrior\n2/ magician\n 0/no class")
         response = await self.bot.wait_for_message(timeout=timeout, author=member,
-                                                   check=lambda msg: msg.content.lower() == '1' or '2' or '0')
+                                                   check=lambda msg: msg.content.lower() == '1')# or '2' or '0')
         if response is none:
             await self.bot.say('nevermind...')
             return
-        if response is '1':
+        #if response is '1':
             #trying to set class, may need a setter in the actors.py?
-            #pc.Class = WarriorClass()
-            return
+            #pc.setClass(WarriorClass())
+            #return
 
 
 

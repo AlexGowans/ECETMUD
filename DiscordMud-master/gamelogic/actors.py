@@ -167,7 +167,10 @@ class PlayerCharacter(Actor):
     def Luck(self):
        me = self.LckPoints*self.Class.LckPointsMulti
        return me
-
+   
+    #@Class.setter
+    def setClass(self,newClass):
+        self.Class = newClass
 
     @property
     def weapon(self):
