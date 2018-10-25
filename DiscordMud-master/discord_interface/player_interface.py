@@ -86,10 +86,10 @@ class PlayerInterface(QObject):
                                        pc.Class.Name,
                                        pc.HitPoints,
                                        pc.MagicPoints,
-                                       pc.StrPoints,
-                                       pc.DexPoints,
-                                       pc.IntPoints,
-                                       pc.LckPoints,
+                                       pc.Strength,
+                                       pc.Dexterity,
+                                       pc.Intelligence,
+                                       pc.Luck,
                                        pc.Currency,
                                        str(pc.EquipmentSet))
         await self.bot.say(msg)
