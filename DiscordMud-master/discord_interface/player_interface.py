@@ -120,6 +120,7 @@ class PlayerInterface(QObject):
               "Info:  \n" \
               "Class Skills: \n" .format(pc.Name,
                                          pc.Class.Name)
+        await self.bot.say(msg)
     #@Class.command(pass_context=True)
     #async def changeclass(slef, ctx: discord.ext.commands.context.context, index):
      #   member = ctx.message.author
