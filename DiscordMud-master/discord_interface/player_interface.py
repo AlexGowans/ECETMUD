@@ -122,23 +122,27 @@ class PlayerInterface(QObject):
                                          pc.Class.Name)
         await self.bot.say(msg)
     @Class.command(pass_context=True)
-    async def change(self, ctx: discord.ext.commands.Context, index):
+    async def change(self, ctx: discord.ext.commands.context.Context):
         member = ctx.message.author
         if not self.check_member(member):
             await self.bot.say("you're not registered yet!")
             return
         pc = self.players[member.id]
         await self.bot.say("change class\n1/ warrior\n2/ magician\n 0/no class")
-        response = await self.bot.wait_for_message(timeout=timeout, author=member,
-                                                   check=lambda msg: msg.content.lower() == '1')# or '2' or '0')
-        if response is none:
+        response = await self.bot.wait_for_message(timeout=TIMEOUT, author=member,content='1'or'2'or'0')# or '2' or '0')
+        if response is None:
             await self.bot.say('nevermind...')
             return
-        #if response is '1':
+        if response.content == '1':
+            await self.bot.say("You are now a Warrior")
             #trying to set class, may need a setter in the actors.py?
-            #pc.setClass(WarriorClass())
-            #return
-
+            pc.setClass(actors.WarriorClass())
+            return
+        if response.content == '2':
+            await self.bot.say("You are now a Magician")
+            #trying to set class, may need a setter in the actors.py?
+            pc.setClass(actors.MagicianClass())
+            return
 
 
     #where am I, the group of inventory commands then the go command
